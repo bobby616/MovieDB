@@ -1,10 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class AppService {
+export class MovieService {
   root(): string {
     return 'NIki TURBOTO';
   }
-
-
 }
