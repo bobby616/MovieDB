@@ -10,22 +10,17 @@ export class MovieController {
     return this.movieService.all();
   }
 
-  @Get('/ranking.desc')
-  rankingDesc(): object {
-    return this.movieService.rankingDesc();
-  }
-
-  @Get('/ranking.asc')
-  rankingAsc(): object {
-    return this.movieService.rankingAsc();
-  }
-  @Get('/popularity.asc')
-  popularityAsc(): object {
-    return this.movieService.popularityAsc();
-  }
-  @Get('/popularity.desc')
-  popularityDesc(): object {
-    return this.movieService.popularityDesc();
+  @Get('/rankings')
+  rankingDesc(@Query() query): object {
+    if (query.vote && query.vote === 'desc') {
+      return this.movieService.rankingDesc();
+    } else if (query.vote && query.vote === 'asc') {
+      return this.movieService.rankingAsc();
+    } else if (query.popularity && query.popularity === 'asc') {
+      return this.movieService.popularityAsc();
+    } else if (query.popularity && query.popularity === 'desc') {
+      return this.movieService.popularityDesc();
+    }
   }
 
   @Post('')
