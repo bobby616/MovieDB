@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { MovieDatabase } from './movieDb';
+import { MovieDatabase } from '../database/movieDb';
 
 const database = [{
   title: 'Nemo',

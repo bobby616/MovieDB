@@ -1,5 +1,5 @@
 import { Get, Controller, Post, Query, Body } from '@nestjs/common';
-import { MovieService } from './movie.service';
+import { MovieService } from '../services/movie.service';
 
 @Controller('/movies')
 export class MovieController {
@@ -31,5 +31,4 @@ export class MovieController {
   @Post('')
   create() {
   }
-
 }
