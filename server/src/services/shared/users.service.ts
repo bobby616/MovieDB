@@ -1,11 +1,16 @@
-import { JwtPayload } from './../../contracts/jwt-payload';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class UsersService {
-    usersDb = [ {username: 'pesho'}];
-    public searchByUsername(payload: JwtPayload): any {
-        const username = payload.username;
-        if (this.usersDb.find((user) => user.username === username)) {
-            return payload;
-        }
+    usersDb = [{ username: 'pesho', password: '123' }];
+
+    isLoggedIn(searchedUser: any) {
+        return !!this.usersDb.find(
+            user =>
+                user.username === searchedUser.username && user.password === searchedUser.password);
+    }
+
+    public searchByUsername(username: string): object {
+        return this.usersDb.find(user => user.username === username);
     }
 }

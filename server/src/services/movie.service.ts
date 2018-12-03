@@ -35,15 +35,16 @@ export class MovieService {
   popularityAsc(): object {
     return this.movieDB.database.sort((movie1, movie2) => movie1.popularity - movie2.popularity);
   }
+
   nameAsc(): object {
     return this.movieDB.database.sort((movie1, movie2) => {
       if (movie1.original_title > movie2.original_title) {
         return -1;
-      };
+      }
       if (movie1.original_title < movie2.original_title) {
         return 1;
       }
       return 0;
-    }
+    });
   }
 }
