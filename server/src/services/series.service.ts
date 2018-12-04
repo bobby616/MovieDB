@@ -4,7 +4,6 @@ import { SeriesDatabase } from '../database/seriesDB';
 @Injectable()
 export class SeriesService {
     constructor(private readonly seriesDB: SeriesDatabase) {
-
     }
     all(): object {
         return this.seriesDB.data();
