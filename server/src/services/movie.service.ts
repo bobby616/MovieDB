@@ -1,20 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { MovieDatabase } from '../database/movieDb';
 
-const database = [{
-  title: 'Nemo',
-  rating: 5,
-},
-{
-  title: 'The godfather',
-  rating: 3,
-},
-{
-  title: 'V is for vendetta',
-  rating: 4,
-},
-];
-
 @Injectable()
 export class MovieService {
   constructor(private readonly movieDB: MovieDatabase) {
