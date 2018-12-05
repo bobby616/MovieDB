@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class UsersService {
-    usersDb = [{ username: 'pesho', password: '123' }];
+    usersDb: any[] = [{ username: 'pesho', password: '123', email: null, avatar: null }];
 
     isLoggedIn(searchedUser: any) {
         return !!this.usersDb.find(
