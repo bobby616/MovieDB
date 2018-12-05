@@ -28,6 +28,8 @@
     "@types/passport-jwt": "^3.0.1",
     "@types/reflect-metadata": "^0.1.0",
     "@types/rimraf": "^2.0.2",
+    "class-transformer": "^0.2.0",
+    "class-validator": "^0.9.1",
     "nest": "^0.1.6",
     "passport": "^0.4.0",
     "passport-http-bearer": "^1.0.1",
