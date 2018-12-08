@@ -11,6 +11,7 @@ export class MovieController {
   }
 
   @Get('/rankings')
+  // we can put a validation pipe
   rankings(@Query() query): object {
     if (query.vote && query.vote === 'desc') {
       return this.movieService.rankingDesc();
