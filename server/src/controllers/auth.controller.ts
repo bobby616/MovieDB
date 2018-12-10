@@ -21,7 +21,7 @@ export class AuthController {
     }
     @Post('register')
     async register(@Body() user: UserRegisterDTO) {
-        if (this.usersService.doesUserExist(user)) {
+        if (await this.usersService.searchByUsername(user.username)) {
             console.log('User already exists');
             return 'User already exists RETURN';
         }   else {

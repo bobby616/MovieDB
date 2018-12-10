@@ -13,15 +13,19 @@ export class MovieController {
   @Get('/rankings')
   // we can put a validation pipe
   rankings(@Query() query): object {
-    if (query.vote && query.vote === 'desc') {
-      return this.movieService.rankingDesc();
-    } else if (query.vote && query.vote === 'asc') {
+    const { vote, popularity } = query;
+    if (vote) {
       return this.movieService.rankingAsc();
-    } else if (query.popularity && query.popularity === 'asc') {
-      return this.movieService.popularityAsc();
-    } else if (query.popularity && query.popularity === 'desc') {
-      return this.movieService.popularityDesc();
     }
+    /*  if (vote && vote === 'desc') {
+       return this.movieService.rankingDesc();
+     } else if (query.vote && query.vote === 'asc') {
+       return this.movieService.rankingAsc();
+     } else if (query.popularity && query.popularity === 'asc') {
+       return this.movieService.popularityAsc();
+     } else if (query.popularity && query.popularity === 'desc') {
+       return this.movieService.popularityDesc();
+     } */
   }
 
   @Post('')

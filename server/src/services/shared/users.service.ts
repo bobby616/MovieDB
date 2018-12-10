@@ -14,17 +14,11 @@ export class UsersService {
                 user.username === searchedUser.username && user.password === searchedUser.password);
     }
 
-    public doesUserExist(UserToRegister: UserRegisterDTO) {
-
-        /// to fix BRoooo
-        createConnection().then(async connection => {
-            const userRepository = getRepository(User);
-            const userToFind = await userRepository.findOne({ username: UserToRegister.username});
-            await connection.close();
-            if (userToFind) {
-                return true;
-            }
-            return false;
-        }).catch(error => console.log(error));
+    public searchByUsername = async (usernameToCheck: string): Promise<any> => {
+        const connection = await createConnection();
+        const userRepository = connection.getRepository(User);
+        const userToFind = await userRepository.findOne({username: usernameToCheck});
+        await connection.close();
+        return userToFind;
     }
 }
