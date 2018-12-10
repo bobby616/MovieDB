@@ -5,21 +5,19 @@ export class User {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column()
+    @Column('nvarchar', { default: "initialized" })
     firstName: string;
 
-    @Column()
+    @Column('varchar', { default: "initialized" })
     lastName: string;
 
-    @Column()
+    @Column('varchar',  { default: "initialized" })
     username: string;
 
-    @Column()
+    @Column('varchar',  { default: "initialized" })
     password: string;
 
-    @Column()
+    @Column('varchar',  { default: "initialized" })
     email: string;
-
-
 
 }

@@ -3,6 +3,7 @@ import { Controller, Get, UseGuards, Post, Query, Body, ValidationPipe } from '@
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from '../services/shared/authentication.service';
 import { UsersService } from '../services/shared/users.service';
+import { createUser } from '..';
 
 @Controller('users')
 export class AuthController {
@@ -20,10 +21,11 @@ export class AuthController {
     }
     @Post('register')
     async register(@Body() user: UserRegisterDTO) {
-        if (this.usersService.searchByUsername(user.username)) {
-            return 'User already exists';
+        if (this.usersService.doesUserExist(user)) {
+            console.log('User already exists');
+            return 'User already exists RETURN';
         }   else {
-            this.usersService.usersDb.push({username: user.username, password: user.password, email: user.email});
+            createUser(user);
         }
     }
 }
