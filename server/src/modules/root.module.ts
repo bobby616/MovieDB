@@ -21,7 +21,7 @@ import { CoreModule } from './core.model';
         username: configService.dbUsername,
         password: configService.dbPassword,
         database: configService.dbName,
-        entities: ['./database/src/entity/*entity.ts'],
+        entities: ['./server/database/entity/*.ts'],
       }),
       inject: [ConfigService],
     }),

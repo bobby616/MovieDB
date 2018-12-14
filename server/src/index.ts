@@ -1,7 +1,5 @@
 import 'reflect-metadata';
 import { createConnection } from 'typeorm';
-import { UserRegisterDTO } from './models/user-register.dto';
-import { User } from '../../database/src/entity/User.entity';
 
 /* export const createUser = (userToRegister: UserRegisterDTO) => {
     createConnection().then(async connection => {
