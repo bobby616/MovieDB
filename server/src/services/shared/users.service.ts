@@ -6,24 +6,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { UserLoginDTO } from '../../models/user-login.dto';
 import { JwtPayload } from '../../contracts/jwt-payload';
+import { UserGetDTO } from 'server/src/models/user-get.dto';
 
 @Injectable()
 export class UsersService {
-    usersDb: any[] = [{ username: 'pesho', password: '123', email: null, avatar: null }];
-
-    /* isLoggedIn(searchedUser: any) {
-        return !!this.usersDb.find(
-            user =>
-                user.username === searchedUser.username && user.password === searchedUser.password);
-    }
-
-    public searchByUsername = async (usernameToCheck: string): Promise<any> => {
-        const connection = await createConnection();
-        const userRepository = connection.getRepository(User);
-        const userToFind = await userRepository.findOne({ username: usernameToCheck });
-        await connection.close();
-        return userToFind;
-    } */
 
     constructor(
         @InjectRepository(User)
@@ -45,8 +31,8 @@ export class UsersService {
         return result;
     }
 
-    async signIn(user: UserLoginDTO): Promise<UserLoginDTO> {
-        const userFound: UserLoginDTO = await this.usersRepository.findOne({ select: ['username', 'password'], where: { username: user.username } });
+    async signIn(user: UserLoginDTO): Promise<UserGetDTO> {
+        const userFound: UserGetDTO = await this.usersRepository.findOne({ select: ['username', 'password'], where: { username: user.username } });
 
         if (userFound) {
             const result = await bcrypt.compare(user.password, userFound.password);
@@ -58,8 +44,8 @@ export class UsersService {
         throw new NotFoundException('Wrong credentials');
     }
 
-    async validateUser(payload: JwtPayload): Promise<UserLoginDTO> {
-        const userFound: UserLoginDTO = await this.usersRepository.findOne({ where: { username: payload.username }});
+    async validateUser(payload: JwtPayload): Promise<UserGetDTO> {
+        const userFound: UserGetDTO = await this.usersRepository.findOne({ where: { username: payload.username }});
         return userFound;
-      }
+    }
 }

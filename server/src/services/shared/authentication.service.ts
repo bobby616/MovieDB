@@ -31,7 +31,7 @@ export class AuthService {
   public async signIn(user: UserLoginDTO): Promise<string> {
     const userFound = await this.usersService.signIn(user);
     if (userFound) {
-      const accessToken = this.jwtService.sign({username: userFound.username});
+      const accessToken = this.jwtService.sign({username: userFound.username, role: userFound.role});
       return accessToken;
     } else {
       throw new NotFoundException('Wrong credentials');
