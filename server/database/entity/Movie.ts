@@ -4,7 +4,7 @@ import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 export class Movie {
     @PrimaryGeneratedColumn('uuid')
     id: string;
-    @Column('varchar' , {default: null})
+    @Column('tinyint' , {default: null})
     adult: boolean;
 
     @Column('varchar', {default: null})
@@ -19,10 +19,8 @@ export class Movie {
 
     @Column('float', {default: null})
     vote_count: number;
-    @Column('int', {default: null})
-    popularity: number;
-    @Column('varchar', {default: null})
-    status: string;
     @Column('float', {default: null})
-    runtime: number;
+    popularity: number;
+    @Column('simple-array', {default: null})
+    genres: number[];
 }
