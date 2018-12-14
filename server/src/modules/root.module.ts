@@ -3,9 +3,30 @@ import { MovieModule } from './movie.module';
 import { AuthModule } from './auth.module';
 import { AuthModuleOptions } from '@nestjs/passport';
 import { SeriesModule } from './series.module';
+import { ConfigService } from '../config/config.service';
+import { ConfigModule } from '../config/config.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { CoreModule } from './core.model';
 
 @Module({
-  imports: [MovieModule, AuthModule, SeriesModule, AuthModuleOptions],
+  imports: [
+    ConfigModule,
+    AuthModule,
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        type: configService.dbType as any,
+        host: configService.dbHost,
+        port: configService.dbPort,
+        username: configService.dbUsername,
+        password: configService.dbPassword,
+        database: configService.dbName,
+        entities: ['./database/src/entity/*entity.ts'],
+      }),
+      inject: [ConfigService],
+    }),
+    CoreModule,
+  ],
   controllers: [],
   providers: [],
 })
