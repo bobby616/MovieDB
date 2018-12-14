@@ -3,22 +3,22 @@
    "host": "localhost",
    "port": 3306,
    "username": "root",
-   "password": "root",
+   "password": "rootmaria",
    "database": "test",
    "synchronize": true,
    "logging": false,
    "entities": [
-      "database/src/entity/**/*.ts"
+      "database/entity/*.ts"
    ],
    "migrations": [
-      "database/src/migration/**/*.ts"
+      "database/migration/**/*.ts"
    ],
    "subscribers": [
-      "database/src/subscriber/**/*.ts"
+      "database/subscriber/**/*.ts"
    ],
    "cli": {
-      "entitiesDir": "database/src/entity",
-      "migrationsDir": "database/src/migration",
-      "subscribersDir": "database/src/subscriber"
+      "entitiesDir": "database/entity",
+      "migrationsDir": "database/migration",
+      "subscribersDir": "database/subscriber"
    }
 }

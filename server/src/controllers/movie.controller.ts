@@ -1,4 +1,4 @@
-import { Get, Controller, Post, Query, Body } from '@nestjs/common';
+import { Get, Controller, Post, Query } from '@nestjs/common';
 import { MovieService } from '../services/movie.service';
 
 @Controller('/movies')
@@ -13,9 +13,11 @@ export class MovieController {
   @Get('/rankings')
   // we can put a validation pipe
   rankings(@Query() query): object {
-    const { vote, popularity } = query;
-    if (vote) {
-      return this.movieService.rankingAsc();
+    const { property, asc_desc } = query;
+    if (property) { // how many validations here ?
+      return this.movieService.ranking(asc_desc, property);
+    } else {
+      return this.movieService.ranking('desc', 'popularity');
     }
   }
 
