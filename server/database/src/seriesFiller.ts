@@ -1,6 +1,6 @@
-import { SeriesDatabase } from './src/seriesDB';
+import { SeriesDatabase } from './seriesDB';
 import { createConnection } from 'typeorm';
-import { Series } from './entity/Series';
+import { Series } from '../entity/Series';
 
 const table2 = new SeriesDatabase().database;
 createConnection({

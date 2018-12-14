@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { createConnection } from 'typeorm';
-import { Movie } from './entity/Movie';
+import { Movie } from '../entity/Movie';
 import { MovieDatabase } from './movieDb';
 
 const table1 = new MovieDatabase().database;
@@ -20,6 +20,7 @@ createConnection({
         const movie = new Movie();
         movie.adult = _movie.adult;
         movie.original_title = _movie.title;
+        movie.genres = _movie.genre_ids;
         movie.overview = _movie.overview;
         movie.release_date = _movie.release_date;
         movie.vote_average = _movie.vote_average;

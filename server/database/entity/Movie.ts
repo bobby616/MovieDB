@@ -21,4 +21,6 @@ export class Movie {
     vote_count: number;
     @Column('float', {default: null})
     popularity: number;
+    @Column('simple-array', {default: null})
+    genres: number[];
 }
