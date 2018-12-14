@@ -1,7 +1,7 @@
 
 import { Injectable } from '@nestjs/common';
 import { createConnection } from 'typeorm';
-import { Movie } from '../../../database/entity/Movie';
+import { Movie } from '../../database/entity/Movie';
 
 @Injectable()
 export class MovieService {
