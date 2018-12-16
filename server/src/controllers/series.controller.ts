@@ -12,14 +12,11 @@ export class SeriesController {
 
     @Get('/rankings')
     rankings(@Query() query): object {
-        if (query.vote && query.vote === 'desc') {
-            return this.seriesService.rankingDesc();
-        } else if (query.vote && query.vote === 'asc') {
-            return this.seriesService.rankingAsc();
-        } else if (query.popularity && query.popularity === 'asc') {
-            return this.seriesService.popularityAsc();
-        } else if (query.popularity && query.popularity === 'desc') {
-            return this.seriesService.popularityDesc();
+        const { property, order } = query;
+        if (property) { // how many validations here ?
+            return this.seriesService.ranking(order, property);
+        } else {
+            return this.seriesService.ranking('desc', 'popularity');
         }
     }
 }

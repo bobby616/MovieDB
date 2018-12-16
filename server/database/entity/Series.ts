@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from 'typeorm';
+import { Actor } from './Actor';
 
 @Entity()
 export class Series {
@@ -16,4 +17,8 @@ export class Series {
     overview: string;
     @Column('float', {default: null})
     popularity: number;
+
+    @ManyToMany(type => Actor, actor => actor.series)
+    @Column('')
+    series_actors: Actor[];
 }

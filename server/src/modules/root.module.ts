@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MovieModule } from './movie.module';
 import { AuthModule } from './auth.module';
-import { AuthModuleOptions } from '@nestjs/passport';
 import { SeriesModule } from './series.module';
 import { ConfigService } from '../config/config.service';
 import { ConfigModule } from '../config/config.module';
@@ -11,6 +10,8 @@ import { CoreModule } from './core.model';
 @Module({
   imports: [
     ConfigModule,
+    MovieModule,
+    SeriesModule,
     AuthModule,
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],

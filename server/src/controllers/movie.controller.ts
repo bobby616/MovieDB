@@ -12,10 +12,11 @@ export class MovieController {
 
   @Get('/rankings')
   // we can put a validation pipe
-  rankings(@Query() query): object {
-    const { property, asc_desc } = query;
+  rankings(@Query() query): any {
+    console.log(query);
+    const { property, order } = query;
     if (property) { // how many validations here ?
-      return this.movieService.ranking(asc_desc, property);
+      return this.movieService.ranking(order, property);
     } else {
       return this.movieService.ranking('desc', 'popularity');
     }

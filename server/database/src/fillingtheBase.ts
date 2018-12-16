@@ -9,7 +9,7 @@ createConnection({
     host: 'localhost',
     port: 3306,
     username: 'root',
-    password: 'rootmaria',
+    password: 'root',
     database: 'test',
     synchronize: true,
     logging: false,
