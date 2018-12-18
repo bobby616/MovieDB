@@ -1,5 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinTable } from 'typeorm';
 import { Roles } from './Roles';
+import { userInfo } from 'os';
+import { RoleEntity } from './RoleEntity';
 
 @Entity({ name: 'users'})
 export class User {
@@ -21,7 +23,11 @@ export class User {
     @Column('varchar', { default: 'initialized' })
     email: string;
 
-    @Column({default: Roles.User})
-    role: Roles;
+    /* @Column({default: Roles.User})
+    role: Roles; */
+
+    @ManyToOne(type => RoleEntity, role => role.user)
+    @JoinTable()
+    roles: RoleEntity;
 
 }

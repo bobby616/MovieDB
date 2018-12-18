@@ -1,6 +1,4 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from 'typeorm';
-import { type } from 'os';
-import { Action } from 'rxjs/internal/scheduler/Action';
 import { Actor } from './Actor';
 
 @Entity()
@@ -29,6 +27,5 @@ export class Movie {
     genres: number[];
 
     @ManyToMany(type => Actor, actor => actor.movies)
-    @Column('')
     movie_actors: Actor[];
 }

@@ -3,6 +3,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from './users.service';
 import { UserLoginDTO } from '../../models/user-login.dto';
+import { UserGetDTO } from 'server/src/models/user-get.dto';
 
  /* @Injectable()
 export class AuthService {
@@ -29,9 +30,9 @@ export class AuthService {
   ) { }
 
   public async signIn(user: UserLoginDTO): Promise<string> {
-    const userFound = await this.usersService.signIn(user);
+    const userFound: UserGetDTO = await this.usersService.signIn(user);
     if (userFound) {
-      const accessToken = this.jwtService.sign({username: userFound.username, role: userFound.role});
+      const accessToken = this.jwtService.sign({username: userFound.username, roles: userFound.roles});
       return accessToken;
     } else {
       throw new NotFoundException('Wrong credentials');

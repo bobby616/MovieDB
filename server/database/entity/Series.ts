@@ -19,6 +19,5 @@ export class Series {
     popularity: number;
 
     @ManyToMany(type => Actor, actor => actor.series)
-    @Column('')
     series_actors: Actor[];
 }

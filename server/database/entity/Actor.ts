@@ -23,11 +23,9 @@ export class Actor {
 
     @ManyToMany(type => Movie, movie => movie.movie_actors)
     @JoinTable()
-    @Column('nvarchar', { default: null })
     movies: Movie[];
 
     @ManyToMany(type => Series, series => series.series_actors)
     @JoinTable()
-    @Column('nvarchar', { default: null })
     series: Series[];
 }

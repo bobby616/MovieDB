@@ -12,10 +12,9 @@ export class AuthController {
     constructor(private readonly authService: AuthService,
                 private readonly usersService: UsersService) { }
 
-
     @Get()
     @UseGuards(AuthGuard(), AdminGuard)
-    get(): string{
+    get(): string {
         return 'yes';
     }
     @Post('login')
