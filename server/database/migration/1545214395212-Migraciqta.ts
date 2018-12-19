@@ -1,9 +1,9 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
-export class Migrating1545134912035 implements MigrationInterface {
+export class Migraciqta1545214395212 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<any> {
-        await queryRunner.query("ALTER TABLE `users` DROP COLUMN `role`");
+        await queryRunner.query("ALTER TABLE `roles` CHANGE `role` `roleName` varchar(255) NOT NULL DEFAULT ''User''");
         await queryRunner.query("ALTER TABLE `movie` CHANGE `adult` `adult` tinyint NULL");
         await queryRunner.query("ALTER TABLE `movie` CHANGE `original_title` `original_title` varchar(255) NULL");
         await queryRunner.query("ALTER TABLE `movie` CHANGE `overview` `overview` longtext NULL");
@@ -21,17 +21,15 @@ export class Migrating1545134912035 implements MigrationInterface {
         await queryRunner.query("ALTER TABLE `actors` CHANGE `firstName` `firstName` varchar(255) NULL");
         await queryRunner.query("ALTER TABLE `actors` CHANGE `nationality` `nationality` varchar(255) NULL");
         await queryRunner.query("ALTER TABLE `actors` CHANGE `age` `age` float NULL");
-        await queryRunner.query("ALTER TABLE `users` DROP FOREIGN KEY `FK_30cd0bbcd1dcae7673af7888eb8`");
-        await queryRunner.query("ALTER TABLE `users` CHANGE `rolesId` `rolesId` varchar(255) NULL");
-        await queryRunner.query("ALTER TABLE `roles` CHANGE `role` `role` varchar(255) NOT NULL DEFAULT 'User'");
-        await queryRunner.query("ALTER TABLE `users` ADD CONSTRAINT `FK_30cd0bbcd1dcae7673af7888eb8` FOREIGN KEY (`rolesId`) REFERENCES `roles`(`id`)");
+        await queryRunner.query("ALTER TABLE `users` DROP FOREIGN KEY `FK_368e146b785b574f42ae9e53d5e`");
+        await queryRunner.query("ALTER TABLE `users` CHANGE `roleId` `roleId` varchar(255) NULL");
+        await queryRunner.query("ALTER TABLE `users` ADD CONSTRAINT `FK_368e146b785b574f42ae9e53d5e` FOREIGN KEY (`roleId`) REFERENCES `roles`(`id`)");
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {
-        await queryRunner.query("ALTER TABLE `users` DROP FOREIGN KEY `FK_30cd0bbcd1dcae7673af7888eb8`");
-        await queryRunner.query("ALTER TABLE `roles` CHANGE `role` `role` varchar(255) NULL DEFAULT 'NULL'");
-        await queryRunner.query("ALTER TABLE `users` CHANGE `rolesId` `rolesId` varchar(255) NULL DEFAULT 'NULL'");
-        await queryRunner.query("ALTER TABLE `users` ADD CONSTRAINT `FK_30cd0bbcd1dcae7673af7888eb8` FOREIGN KEY (`rolesId`) REFERENCES `roles`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT");
+        await queryRunner.query("ALTER TABLE `users` DROP FOREIGN KEY `FK_368e146b785b574f42ae9e53d5e`");
+        await queryRunner.query("ALTER TABLE `users` CHANGE `roleId` `roleId` varchar(255) NULL DEFAULT 'NULL'");
+        await queryRunner.query("ALTER TABLE `users` ADD CONSTRAINT `FK_368e146b785b574f42ae9e53d5e` FOREIGN KEY (`roleId`) REFERENCES `roles`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT");
         await queryRunner.query("ALTER TABLE `actors` CHANGE `age` `age` float(12) NULL DEFAULT 'NULL'");
         await queryRunner.query("ALTER TABLE `actors` CHANGE `nationality` `nationality` varchar(255) NULL DEFAULT 'NULL'");
         await queryRunner.query("ALTER TABLE `actors` CHANGE `firstName` `firstName` varchar(255) NULL DEFAULT 'NULL'");
@@ -49,7 +47,7 @@ export class Migrating1545134912035 implements MigrationInterface {
         await queryRunner.query("ALTER TABLE `movie` CHANGE `overview` `overview` longtext NULL DEFAULT 'NULL'");
         await queryRunner.query("ALTER TABLE `movie` CHANGE `original_title` `original_title` varchar(255) NULL DEFAULT 'NULL'");
         await queryRunner.query("ALTER TABLE `movie` CHANGE `adult` `adult` tinyint NULL DEFAULT 'NULL'");
-        await queryRunner.query("ALTER TABLE `users` ADD `role` varchar(255) NOT NULL DEFAULT ''User''");
+        await queryRunner.query("ALTER TABLE `roles` CHANGE `roleName` `role` varchar(255) NOT NULL DEFAULT ''User''");
     }
 
 }

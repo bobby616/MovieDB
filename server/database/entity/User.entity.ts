@@ -3,7 +3,7 @@ import { Roles } from './Roles';
 import { userInfo } from 'os';
 import { RoleEntity } from './RoleEntity';
 
-@Entity({ name: 'users'})
+@Entity({ name: 'users' })
 export class User {
     @PrimaryGeneratedColumn('uuid')
     id: string;
@@ -26,8 +26,10 @@ export class User {
     /* @Column({default: Roles.User})
     role: Roles; */
 
-    @ManyToOne(type => RoleEntity, role => role.user)
+    @ManyToOne(type => RoleEntity, role => role.user, {
+        eager: true,
+    })
     @JoinTable()
-    roles: RoleEntity;
+    role: RoleEntity;
 
 }

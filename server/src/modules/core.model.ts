@@ -4,9 +4,10 @@ import { User } from '../../database/entity/User.entity';
 import { UsersService } from '../services/shared/users.service';
 import { Movie } from 'server/database/entity/Movie';
 import { Series } from 'server/database/entity/Series';
+import { RoleEntity } from 'server/database/entity/RoleEntity';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([User, Movie, Series])],
+    imports: [TypeOrmModule.forFeature([User, Movie, Series, RoleEntity])],
     providers: [UsersService],
     exports: [UsersService],
 })

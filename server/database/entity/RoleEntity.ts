@@ -13,6 +13,6 @@ export class RoleEntity {
     @Column('varchar', { default: Roles.User })
     role: Roles;
 
-    @OneToMany(type => User, user => user.roles)
+    @OneToMany(type => User, user => user.role)
     user: User[];
 }

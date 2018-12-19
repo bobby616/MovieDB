@@ -13,7 +13,7 @@ export class SeriesController {
     @Get('/rankings')
     rankings(@Query() query): object {
         const { property, order } = query;
-        if (property) { // how many validations here ?
+        if (property) {// how many validations here ?
             return this.seriesService.ranking(order, property);
         } else {
             return this.seriesService.ranking('desc', 'popularity');
