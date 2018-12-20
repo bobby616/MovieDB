@@ -1,5 +1,5 @@
 import { JwtPayload } from './../../contracts/jwt-payload';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, HttpStatus } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from './users.service';
 import { UserLoginDTO } from '../../models/user-login.dto';
@@ -30,13 +30,13 @@ export class AuthService {
   ) { }
 
   public async signIn(user: UserLoginDTO): Promise<string> {
-    const userFound: UserGetDTO = await this.usersService.signIn(user);
-    if (userFound) {
-      const accessToken = this.jwtService.sign({username: userFound.username, roles: userFound.roles});
-      return accessToken;
-    } else {
-      throw new NotFoundException('Wrong credentials');
-    }
+      const userFound: UserGetDTO = await this.usersService.signIn(user);
+      if (userFound) {
+        const accessToken = this.jwtService.sign({username: userFound.username, roles: userFound.roles});
+        return accessToken;
+      } else {
+        throw new NotFoundException('Wrong credentials');
+      }
   }
 
   async validateUser(payload: JwtPayload): Promise<UserLoginDTO> {

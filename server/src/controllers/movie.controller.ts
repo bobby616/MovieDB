@@ -7,22 +7,29 @@ export class MovieController {
 
   @Get()
   all(): object {
-    return this.movieService.all();
+    try {
+      return this.movieService.all();
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
   @Get('/rankings')
   // we can put a validation pipe
   rankings(@Query() query): any {
-    console.log(query);
-    const { property, order } = query;
-    if (property) { // how many validations here ?
-      return this.movieService.ranking(order, property);
-    } else {
-      return this.movieService.ranking('desc', 'popularity');
+    try {
+      const { property, order } = query;
+      if (property) { // how many validations here ?
+        return this.movieService.ranking(order, property);
+      } else {
+        return this.movieService.ranking('desc', 'popularity');
+      }
+    }
+    catch (error) {
+      throw new Error(error);
     }
   }
-
-  @Post('')
+    @Post('')
   create() {
   }
 }

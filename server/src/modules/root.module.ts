@@ -5,7 +5,7 @@ import { SeriesModule } from './series.module';
 import { ConfigService } from '../config/config.service';
 import { ConfigModule } from '../config/config.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CoreModule } from './core.model';
+import { CoreModule } from './core.module';
 
 @Module({
   imports: [
