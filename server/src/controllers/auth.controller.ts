@@ -9,7 +9,7 @@ import { AdminGuard } from '../guards/adminGuard';
 @Controller('users')
 export class AuthController {
     constructor(private readonly authService: AuthService,
-                private readonly usersService: UsersService) { }
+        private readonly usersService: UsersService) { }
 
     @Get()
     @UseGuards(AuthGuard(), AdminGuard)
@@ -33,11 +33,7 @@ export class AuthController {
         transform: true,
         whitelist: true,
     })) user: UserRegisterDTO): Promise<string> {
-       try {
-     await this.usersService.registerUser(user);
-       } catch (error) {
-           throw new Error(error);
-       }
-       return `User with unique username ${user.username} was saved in the Database`;
+        await this.usersService.registerUser(user);
+        return `User with unique username ${user.username} was saved in the Database`;
     }
 }
