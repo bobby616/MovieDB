@@ -1,6 +1,5 @@
 import { UserRegisterDTO } from './../models/user-register.dto';
 import { Controller, Get, UseGuards, Post, Query, Body, ValidationPipe } from '@nestjs/common';
-// import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from '../services/shared/authentication.service';
 import { UsersService } from '../services/shared/users.service';
 import { UserLoginDTO } from '../models/user-login.dto';
@@ -22,7 +21,11 @@ export class AuthController {
         transform: true,
         whitelist: true,
     })) user: UserLoginDTO): Promise<string> {
-        return await this.authService.signIn(user);
+        try {
+            return await this.authService.signIn(user);
+        } catch (error) {
+            throw new Error(error);
+        }
     }
 
     @Post('register')
@@ -30,7 +33,11 @@ export class AuthController {
         transform: true,
         whitelist: true,
     })) user: UserRegisterDTO): Promise<string> {
-        await this.usersService.registerUser(user);
-        return `User with unique username ${user.username} was saved in the Database`;
+       try {
+     await this.usersService.registerUser(user);
+       } catch (error) {
+           throw new Error(error);
+       }
+       return `User with unique username ${user.username} was saved in the Database`;
     }
 }

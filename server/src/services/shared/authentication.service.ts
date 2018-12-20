@@ -1,5 +1,5 @@
 import { JwtPayload } from './../../contracts/jwt-payload';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, HttpStatus } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from './users.service';
 import { UserLoginDTO } from '../../models/user-login.dto';

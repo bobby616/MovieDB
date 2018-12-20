@@ -7,7 +7,7 @@ import { AuthController } from '../controllers/auth.controller';
 import { UsersService } from '../services/shared/users.service';
 import { ConfigService } from '../config/config.service';
 import { ConfigModule } from '../config/config.module';
-import { CoreModule } from './core.model';
+import { CoreModule } from './core.module';
 import { MovieModule } from './movie.module';
 import { Series } from 'server/database/entity/Series';
 import { SeriesModule } from './series.module';

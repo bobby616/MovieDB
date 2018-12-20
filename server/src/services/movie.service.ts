@@ -1,5 +1,5 @@
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpStatus } from '@nestjs/common';
 import { createConnection, Repository } from 'typeorm';
 import { Movie } from '../../database/entity/Movie';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -14,23 +14,27 @@ export class MovieService {
   public info: object;
 
   all(): object {
-    this.info = this.movieRepository.find({});
-    return this.info;
+    try {
+      this.info = this.movieRepository.find({});
+      return this.info;
+    } catch (error) {
+      HttpStatus.INTERNAL_SERVER_ERROR;
+    }
   }
 
   async ranking(order: string, param: string): Promise<object> {
-    let result: any;
-    if (order === 'asc') {
-      result = await this.movieRepository
-      .createQueryBuilder('movie')
-      .orderBy(`movie.${param}`, `ASC`)
-      .getMany();
-    } else {
-      result = await this.movieRepository
-      .createQueryBuilder('movie')
-      .orderBy(`movie.${param}`, `DESC`)
-      .getMany();
-    }
-    return result;
+      let result: any;
+      if (order === 'asc') {
+        result = await this.movieRepository
+        .createQueryBuilder('movie')
+        .orderBy(`movie.${param}`, `ASC`)
+        .getMany();
+      } else {
+        result = await this.movieRepository
+        .createQueryBuilder('movie')
+        .orderBy(`movie.${param}`, `DESC`)
+        .getMany();
+      }
+      return result;
   }
 }

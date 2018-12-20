@@ -1,5 +1,5 @@
-import { Injectable, BadRequestException, NotFoundException } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Injectable, BadRequestException, NotFoundException, HttpStatus } from '@nestjs/common';
+import { createConnection, Repository } from 'typeorm';
 import { UserRegisterDTO } from '../../models/user-register.dto';
 import { User } from '../../../database/entity/User.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -51,9 +51,8 @@ export class UsersService {
             if (result) {
                 return userFound;
             }
+            throw new NotFoundException('Wrong credentials');
         }
-
-        throw new NotFoundException('Wrong credentials');
     }
 
     async validateUser(payload: JwtPayload): Promise<User> {
