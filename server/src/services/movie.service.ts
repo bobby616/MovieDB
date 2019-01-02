@@ -14,12 +14,8 @@ export class MovieService {
   public info: object;
 
   all(): object {
-    try {
       this.info = this.movieRepository.find({});
       return this.info;
-    } catch (error) {
-      HttpStatus.INTERNAL_SERVER_ERROR;
-    }
   }
 
   async ranking(order: string, param: string): Promise<object> {
