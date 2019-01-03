@@ -1,4 +1,4 @@
-import { Get, Controller, Post, Query, Body, UseGuards, ValidationPipe, HttpStatus } from '@nestjs/common';
+import { Get, Controller, Post, Query, Body, UseGuards, ValidationPipe, HttpException, HttpStatus } from '@nestjs/common';
 import { SeriesService } from '../services/series.service';
 import { AddSeriesDTO } from '../models/add-series.dto';
 import { AuthGuard } from '@nestjs/passport';
@@ -36,6 +36,10 @@ export class SeriesController {
         transform: true,
         whitelist: true,
     })) serie: AddSeriesDTO): Promise<void> {
+        try {
             return this.seriesService.add(serie);
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+        }
     }
 }
