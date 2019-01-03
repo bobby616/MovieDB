@@ -1,6 +1,6 @@
+import { Roles } from './../../database/entity/Roles';
 import { CanActivate, ExecutionContext, Injectable, HttpStatus } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { Roles } from 'server/database/entity/Roles';
 
 @Injectable()
 export class AdminGuard implements CanActivate {

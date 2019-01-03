@@ -1,3 +1,4 @@
+import { RoleEntity } from './../../../database/entity/RoleEntity';
 import { Injectable, BadRequestException, NotFoundException, HttpStatus } from '@nestjs/common';
 import { createConnection, Repository } from 'typeorm';
 import { UserRegisterDTO } from '../../models/user-register.dto';
@@ -6,8 +7,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { UserLoginDTO } from '../../models/user-login.dto';
 import { JwtPayload } from '../../contracts/jwt-payload';
-import { UserGetDTO } from 'server/src/models/user-get.dto';
-import { RoleEntity } from 'server/database/entity/RoleEntity';
+
 
 @Injectable()
 export class UsersService {
