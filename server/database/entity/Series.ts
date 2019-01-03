@@ -18,6 +18,6 @@ export class Series {
     @Column('float', {default: null})
     popularity: number;
 
-    @ManyToMany(type => Actor, actor => actor.series)
+    @ManyToMany(type => Actor, actor => actor.series, {eager: true})
     series_actors: Actor[];
 }

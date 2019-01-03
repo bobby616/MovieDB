@@ -19,7 +19,6 @@
       "test:e2e": "jest --config ./test/jest-e2e.json",
       "migration:generate": "ts-node ./node_modules/typeorm/cli.js migration:generate",
       "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run"
-
    },
    "dependencies": {
       "@nestjs/common": "^5.5.0",
@@ -48,7 +47,6 @@
       "rxjs": "^6.3.3",
       "typeorm": "^0.2.9",
       "typescript": "^3.0.1"
-
    },
    "devDependencies": {
       "@nestjs/testing": "^5.1.0",
