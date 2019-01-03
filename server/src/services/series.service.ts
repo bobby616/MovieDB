@@ -1,15 +1,17 @@
 import { Injectable, HttpStatus } from '@nestjs/common';
-import { SeriesDatabase } from '../../database/src/seriesDB';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Series } from 'server/database/entity/Series';
 import { Repository } from 'typeorm';
 import { AddSeriesDTO } from '../models/add-series.dto';
+import { Series } from 'server/database/entity/Series';
+import { Actor } from 'server/database/entity/Actor';
 
 @Injectable()
 export class SeriesService {
     constructor(
         @InjectRepository(Series)
         private readonly seriesRepository: Repository<Series>,
+        @InjectRepository(Actor)
+        private readonly actorsRepository: Repository<Actor>,
     ) { }
     info: object;
 
@@ -34,6 +36,14 @@ export class SeriesService {
     }
 
     async add(serieToAdd: AddSeriesDTO){
+        const checkSerie = await this.seriesRepository.findOne({
+            where: {original_name: serieToAdd.original_name},
+        });
+
+        if (checkSerie){
+            throw new Error('This series already exists');
+        }
+
         const serie = new Series();
         serie.original_name = serieToAdd.original_name;
         serie.popularity = serieToAdd.popularity;
@@ -41,6 +51,13 @@ export class SeriesService {
         serie.vote_average = serieToAdd.vote_average;
         serie.vote_count = serieToAdd.vote_count;
         serie.genres = serieToAdd.genres;
+
+        const actors: Actor[] = await Promise.all(serieToAdd.series_actors.map((actor) => {
+            return this.actorsRepository.findOne({id: actor});
+        }));
+
+        serie.series_actors = actors;
         await this.seriesRepository.save(serie);
+        console.log(serie);
     }
 }

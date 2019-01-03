@@ -1,9 +1,8 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
-export class Migraciqta1545214395212 implements MigrationInterface {
+export class Yes1546518915393 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<any> {
-        await queryRunner.query("ALTER TABLE `roles` CHANGE `role` `roleName` varchar(255) NOT NULL DEFAULT ''User''");
         await queryRunner.query("ALTER TABLE `movie` CHANGE `adult` `adult` tinyint NULL");
         await queryRunner.query("ALTER TABLE `movie` CHANGE `original_title` `original_title` varchar(255) NULL");
         await queryRunner.query("ALTER TABLE `movie` CHANGE `overview` `overview` longtext NULL");
@@ -47,7 +46,6 @@ export class Migraciqta1545214395212 implements MigrationInterface {
         await queryRunner.query("ALTER TABLE `movie` CHANGE `overview` `overview` longtext NULL DEFAULT 'NULL'");
         await queryRunner.query("ALTER TABLE `movie` CHANGE `original_title` `original_title` varchar(255) NULL DEFAULT 'NULL'");
         await queryRunner.query("ALTER TABLE `movie` CHANGE `adult` `adult` tinyint NULL DEFAULT 'NULL'");
-        await queryRunner.query("ALTER TABLE `roles` CHANGE `roleName` `role` varchar(255) NOT NULL DEFAULT ''User''");
     }
 
 }

@@ -6,23 +6,6 @@ import { UserLoginDTO } from '../../models/user-login.dto';
 import { UserGetDTO } from 'server/src/models/user-get.dto';
 import { User } from 'server/database/entity/User.entity';
 
-/* @Injectable()
-export class AuthService {
- constructor(
-   private readonly jwtService: JwtService,
-   private readonly usersService: UsersService,
- ) { }
-
- async signIn(payload: JwtPayload): Promise<string> {
-   const accessToken = this.jwtService.sign(payload);
-   return accessToken;
- }
-
- async validateUser(payload: JwtPayload): Promise<any> {
-   return !!this.usersService.searchByUsername(payload.username);
- }
-} */
-
 @Injectable()
 export class AuthService {
   constructor(

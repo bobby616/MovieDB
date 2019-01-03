@@ -26,6 +26,6 @@ export class Movie {
     @Column('simple-array', { default: null })
     genres: number[];
 
-    @ManyToMany(type => Actor, actor => actor.movies)
+    @ManyToMany(type => Actor, actor => actor.movies , {eager: true})
     movie_actors: Actor[];
 }
