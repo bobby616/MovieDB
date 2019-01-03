@@ -1,5 +1,6 @@
-import { Get, Controller, Post, Query } from '@nestjs/common';
+import { Get, Controller, Post, Query, Body, HttpCode, ValidationPipe } from '@nestjs/common';
 import { MovieService } from '../services/movie.service';
+import { AddMovieDTO } from '../models/add-movie.dto';
 
 @Controller('/movies')
 export class MovieController {
@@ -29,7 +30,12 @@ export class MovieController {
       throw new Error(error);
     }
   }
-    @Post('')
-  create() {
+    @Post('/add-movie')
+  create(@Body() movie: AddMovieDTO) {
+    try {
+      this.movieService.addMovie(movie);
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 }

@@ -8,7 +8,8 @@ import { AdminGuard } from '../guards/adminGuard';
 
 @Controller('users')
 export class AuthController {
-    constructor(private readonly authService: AuthService,
+    constructor(
+        private readonly authService: AuthService,
         private readonly usersService: UsersService) { }
 
     @Get()
