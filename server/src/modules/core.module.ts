@@ -1,4 +1,4 @@
-import { Actor } from 'server/database/entity/Actor';
+import { Actor } from './../../database/entity/Actor';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Module } from '@nestjs/common';
 import { User } from '../../database/entity/User.entity';
