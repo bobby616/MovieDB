@@ -4,7 +4,6 @@ import { AuthService } from "../services/shared/authentication.service";
 import { AuthController } from "../controllers/auth.controller";
 import { UserLoginDTO } from "../models/user-login.dto";
 
-
 jest.mock('../services/shared/authentication.service');
 jest.mock('../services/shared/users.service');
 
