@@ -17,6 +17,7 @@ export class AuthController {
     get(): string {
         return 'yes';
     }
+
     @Post('login')
     async sign(@Body(new ValidationPipe({
         transform: true,
