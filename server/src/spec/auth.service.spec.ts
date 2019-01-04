@@ -8,7 +8,7 @@ import { UsersService } from '../services/shared/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { UserLoginDTO } from '../models/user-login.dto';
 import { JwtServiceMock } from './mocks/jwtServiceMock';
-import { Roles } from './../../database/entity/Roles';
+import { validate } from 'class-validator';
 
 describe('AuthService', () => {
 
@@ -16,10 +16,11 @@ describe('AuthService', () => {
         save: () => ({}),
     };
     const rolesRepository: any = {};
-
     let jwtServiceMock: JwtServiceMock;
+
     const userService: any = {
-        signIn: () => { return {} }
+        signIn: () => { return {} },
+        validateUser: () => {return {}}
     };
     let authService: AuthService;
 
@@ -45,7 +46,7 @@ describe('AuthService', () => {
 
     });
 
-    describe('method ', () => {
+    describe('method', () => {
         it('signIn should be called', () => {
 
             // Arrange
@@ -59,17 +60,21 @@ describe('AuthService', () => {
 
         });
 
-        it('signIn should throw when user doesn"t exist', () => {
+        it('signIn should throw when user doesn"t exist', async () => {
             // Arrange
+
+            let msg = '';
             const user: UserLoginDTO = new UserLoginDTO();
-
-            jest.spyOn(userService, 'signIn').mockImplementation(() => {
-                return false;
-            });
-            const result = authService.signIn(user);
-
+            try {
+                jest.spyOn(userService, 'signIn').mockImplementation(() => {
+                    return null;
+                });
+                const result = await authService.signIn(user);
+            }catch (error){
+                msg = error.message;
+            }
             // Аct & Assert
-            expect(result).toThrow();
+            expect(msg).toEqual({"error": "Not Found", "message": "Wrong credentials", "statusCode": 404});
 
         });
 
@@ -78,7 +83,7 @@ describe('AuthService', () => {
             // Arrange
             const user: UserLoginDTO = new UserLoginDTO();
 
-            const payload = {username: 'toshko'};
+            const payload = { username: 'toshko' };
             const result = jest.spyOn(authService, 'validateUser');
 
             // Act
@@ -88,12 +93,22 @@ describe('AuthService', () => {
             expect(result).toHaveBeenCalledTimes(1);
 
         });
+
+        it('validateUser should return user Object', async () => {
+
+            // Arrange
+            const user: UserLoginDTO = new UserLoginDTO();
+            userService.validateUser = () => { return 'toshi'};
+
+            const payload = { username: 'toshi' };
+            jest.spyOn(authService, 'validateUser');
+
+            // Act
+            const result = await authService.validateUser(payload);
+
+            // Assert
+            expect(result).toBe('toshi');
+
+        });
     });
 });
-
-/*
-describe('AuthService should', () => {
-    it('should ', () => {
-
-    });
-});*/

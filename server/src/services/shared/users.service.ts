@@ -1,13 +1,12 @@
 import { RoleEntity } from './../../../database/entity/RoleEntity';
 import { Injectable, BadRequestException, NotFoundException, HttpStatus } from '@nestjs/common';
-import { createConnection, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { UserRegisterDTO } from '../../models/user-register.dto';
 import { User } from '../../../database/entity/User.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { UserLoginDTO } from '../../models/user-login.dto';
 import { JwtPayload } from '../../contracts/jwt-payload';
-
 
 @Injectable()
 export class UsersService {
@@ -35,9 +34,6 @@ export class UsersService {
         user.role = await this.rolesRepository.findOne({ where: { role: 'user' } });
         user.username = userToRegister.username;
 
-        // await this.usersRepository.create(userToRegister);
-
-        // const result = await this.usersRepository.save([userToRegister]);
         const result = await this.usersRepository.save(user);
 
         return result;
