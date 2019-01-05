@@ -53,7 +53,7 @@ export class SeriesService {
         serie.genres = serieToAdd.genres;
 
         const actors: Actor[] = await Promise.all(serieToAdd.series_actors.map((actor) => {
-            return this.actorsRepository.findOne( {id: actor} );
+            return this.actorsRepository.findOne( {id: actor.id} );
         }));
 
         serie.series_actors = actors;

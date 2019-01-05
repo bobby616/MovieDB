@@ -35,7 +35,10 @@ export class AuthController {
         transform: true,
         whitelist: true,
     })) user: UserRegisterDTO): Promise<string> {
-        await this.usersService.registerUser(user);
-        return `User with unique username ${user.username} was saved in the Database`;
+        try {
+            await this.usersService.registerUser(user);
+            return `User with unique username ${user.username} was saved in the Database`;
+        } catch (error) {
+        }
     }
 }

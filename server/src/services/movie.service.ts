@@ -50,7 +50,7 @@ export class MovieService {
     movie.vote_average = movieToAdd.vote_average;
     movie.vote_count = movieToAdd.vote_count;
     const actors: Actor[] = await Promise.all(movieToAdd.actors.map((actorId) => {
-      return this.actorRepository.findOne({where: { id: actorId } });
+      return this.actorRepository.findOne( { id: actorId.id });
     }));
     movie.movie_actors = actors;
     console.log(actors);
