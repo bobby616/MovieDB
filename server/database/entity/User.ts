@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinTable } from 'typeorm';
 import { Roles } from './Roles';
 import { userInfo } from 'os';
-import { RoleEntity } from './RoleEntity';
+import { Role } from './Role';
 
 @Entity({ name: 'users' })
 export class User {
@@ -26,10 +26,10 @@ export class User {
     /* @Column({default: Roles.User})
     role: Roles; */
 
-    @ManyToOne(type => RoleEntity, role => role.user, {
+    @ManyToOne(type => Role, role => role.user, {
         eager: true,
     })
     @JoinTable()
-    role: RoleEntity;
+    role: Role;
 
 }

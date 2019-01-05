@@ -1,10 +1,10 @@
-import { UserRegisterDTO } from './../models/user-register.dto';
-import { User } from './../../database/entity/User.entity';
+import { UserRegisterDTO } from '../models/user-register.dto';
+import { User } from '../../database/entity/User';
 import { JwtServiceMock } from './mocks/jwtServiceMock';
 import { Test } from '@nestjs/testing';
 import { PassportModule } from '@nestjs/passport';
-import { RoleEntity } from './../../database/entity/RoleEntity';
-import { UsersService } from './../services/shared/users.service';
+import { Role } from '../../database/entity/Role';
+import { UsersService } from '../services/shared/users.service';
 
 describe('UserService ', () => {
     let jwtServiceMock: JwtServiceMock;
@@ -21,7 +21,7 @@ describe('UserService ', () => {
             })],
             providers: [UsersService],
         }).overrideProvider(User).useValue(usersRepository)
-            .overrideProvider(RoleEntity).useValue(roleRepository).compile();
+            .overrideProvider(Role).useValue(roleRepository).compile();
 
         userService = module.get<UsersService>(UsersService);
     });

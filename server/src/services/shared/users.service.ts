@@ -1,8 +1,8 @@
-import { RoleEntity } from './../../../database/entity/RoleEntity';
+import { Role } from '../../../database/entity/Role';
 import { Injectable, BadRequestException, NotFoundException, HttpStatus } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { UserRegisterDTO } from '../../models/user-register.dto';
-import { User } from '../../../database/entity/User.entity';
+import { User } from '../../../database/entity/User';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { UserLoginDTO } from '../../models/user-login.dto';
@@ -14,8 +14,8 @@ export class UsersService {
     constructor(
         @InjectRepository(User)
         private readonly usersRepository: Repository<User>,
-        @InjectRepository(RoleEntity)
-        private readonly rolesRepository: Repository<RoleEntity>,
+        @InjectRepository(Role)
+        private readonly rolesRepository: Repository<Role>,
     ) { }
 
     async registerUser(userToRegister: UserRegisterDTO) {

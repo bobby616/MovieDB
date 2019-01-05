@@ -2,7 +2,7 @@ import { Injectable, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { AddSeriesDTO } from '../models/add-series.dto';
-import { Series } from 'server/database/entity/Series';
+import { Series } from 'server/database/entity/Serie';
 import { Actor } from 'server/database/entity/Actor';
 
 @Injectable()
