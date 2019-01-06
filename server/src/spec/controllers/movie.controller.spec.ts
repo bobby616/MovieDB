@@ -1,7 +1,7 @@
-import { AddMovieDTO } from './../models/add-movie.dto';
-import { MovieService } from './../services/movie.service';
-import { UsersService } from './../services/shared/users.service';
-import { MovieController } from '../controllers/movie.controller';
+import { AddMovieDTO } from '../../models/add-movie.dto';
+import { MovieService } from '../../services/movie.service';
+import { UsersService } from '../../services/shared/users.service';
+import { MovieController } from '../../controllers/movie.controller';
 
 jest.mock('../services/movie.service');
 
@@ -11,7 +11,7 @@ describe('MovieController', () => {
         const movieService: MovieService = new MovieService(null, null);
         const controller: MovieController = new MovieController(movieService);
 
-        jest.spyOn(movieService, 'all').mockImplementation(()=>{
+        jest.spyOn(movieService, 'all').mockImplementation(() => {
             return {};
         });
 

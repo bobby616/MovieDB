@@ -1,5 +1,5 @@
-import { AddSeriesDTO } from './../../models/add-series.dto';
-import { SeriesController } from './../../controllers/series.controller';
+import { AddSeriesDTO } from '../../models/add-series.dto';
+import { SeriesController } from '../../controllers/series.controller';
 import { Repository } from 'typeorm';
 import { only } from 'joi';
 import { Series } from '../../../database/entity/Series';

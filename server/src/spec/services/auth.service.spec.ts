@@ -1,13 +1,13 @@
-import { UsersService } from './../services/shared/users.service';
-import { Role } from '../../database/entity/Role';
-import { User } from '../../database/entity/User';
+import { UsersService } from '../../services/shared/users.service';
+import { Role } from '../../../database/entity/Role';
+import { User } from '../../../database/entity/User';
 import { Test, TestingModule } from '@nestjs/testing';
 import { PassportModule } from '@nestjs/passport';
-import { AuthService } from '../services/shared/authentication.service';
+import { AuthService } from '../../services/shared/authentication.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { JwtService } from '@nestjs/jwt';
-import { UserLoginDTO } from '../models/user-login.dto';
-import { JwtServiceMock } from './mocks/jwtServiceMock';
+import { UserLoginDTO } from '../../models/user-login.dto';
+import { JwtServiceMock } from '../mocks/jwtServiceMock';
 import { validate } from 'class-validator';
 
 jest.mock('../services/shared/users.service');

@@ -1,7 +1,7 @@
-import { AddMovieDTO } from './../models/add-movie.dto';
-import { Movie } from './../../database/entity/Movie';
-import { Actor } from './../../database/entity/Actor';
-import { MovieService } from './../services/movie.service';
+import { AddMovieDTO } from '../../models/add-movie.dto';
+import { Movie } from '../../../database/entity/Movie';
+import { Actor } from '../../../database/entity/Actor';
+import { MovieService } from '../../services/movie.service';
 import { Test } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 
