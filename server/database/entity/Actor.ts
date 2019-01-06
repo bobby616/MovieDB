@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable } from 'typeorm';
 import { Movie } from './Movie';
-import { Series } from './Serie';
+import { Series } from './Series';
 
 @Entity({
     name: 'actors',

@@ -33,10 +33,7 @@ export class UsersService {
         user.password = userToRegister.password;
         user.role = await this.rolesRepository.findOne({ where: { role: 'user' } });
         user.username = userToRegister.username;
-
-        const result = await this.usersRepository.save(user);
-
-        return result;
+        await this.usersRepository.save(user);
     }
 
     async signIn(user: UserLoginDTO): Promise<User> {
