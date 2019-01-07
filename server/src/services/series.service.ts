@@ -1,35 +1,53 @@
-import { Injectable } from '@nestjs/common';
-import { SeriesDatabase } from '../database/seriesDB';
+import { Injectable, HttpStatus } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { AddSeriesDTO } from '../models/add-series.dto';
+import { Actor } from '../../database/entity/Actor';
+import { Series } from '../../database/entity/Series';
 
 @Injectable()
 export class SeriesService {
-    constructor(private readonly seriesDB: SeriesDatabase) {
-    }
-    all(): object {
-        return this.seriesDB.data();
-    }
-    rankingDesc(): object {
-        return this.seriesDB.database.sort((series1, seires2) => seires2.vote_average - series1.vote_average);
-    }
-    rankingAsc(): object {
-        return this.seriesDB.database.sort((series1, seires2) => series1.vote_average - seires2.vote_average);
-    }
-    popularityDesc(): object {
-        return this.seriesDB.database.sort((series1, seires2) => seires2.popularity - series1.popularity);
-    }
-    popularityAsc(): object {
-        return this.seriesDB.database.sort((series1, seires2) => series1.popularity - seires2.popularity);
+    constructor(
+        @InjectRepository(Series)
+        private readonly seriesRepository: Repository<Series>,
+        @InjectRepository(Actor)
+        private readonly actorsRepository: Repository<Actor>,
+    ) { }
+
+    async all(): Promise<object> {
+        return await this.seriesRepository.find({});
     }
 
-    nameAsc(): object {
-        return this.seriesDB.database.sort((series1, seires2) => {
-            if (series1.original_name > seires2.original_name) {
-                return -1;
-            }
-            if (series1.original_name < seires2.original_name) {
-                return 1;
-            }
-            return 0;
+    async ranking(ordered: string, param: string): Promise<object> {
+        try {
+            return await this.seriesRepository.find({ order: { [param]: ordered } });
+        } catch (error) {
+            return await this.seriesRepository.find({ order: { popularity: 'DESC' } });
+        }
+    }
+
+    async add(serieToAdd: AddSeriesDTO) {
+        const checkSerie = await this.seriesRepository.findOne({
+            where: { original_name: serieToAdd.original_name },
         });
+
+        if (checkSerie) {
+            throw new Error('This series already exists');
+        }
+
+        const serie = new Series();
+        serie.original_name = serieToAdd.original_name;
+        serie.popularity = serieToAdd.popularity;
+        serie.overview = serieToAdd.overview;
+        serie.vote_average = serieToAdd.vote_average;
+        serie.vote_count = serieToAdd.vote_count;
+        serie.genres = serieToAdd.genres;
+
+        const actors: Actor[] = await Promise.all(serieToAdd.series_actors.map((actor) => {
+            return this.actorsRepository.findOne({ id: actor.id });
+        }));
+
+        serie.series_actors = actors;
+        await this.seriesRepository.save(serie);
     }
 }

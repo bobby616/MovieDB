@@ -1,5 +1,6 @@
-import { Get, Controller, Post, Query, Body } from '@nestjs/common';
+import { Get, Controller, Post, Query, Body, HttpCode, ValidationPipe } from '@nestjs/common';
 import { MovieService } from '../services/movie.service';
+import { AddMovieDTO } from '../models/add-movie.dto';
 
 @Controller('/movies')
 export class MovieController {
@@ -7,28 +8,34 @@ export class MovieController {
 
   @Get()
   all(): object {
-    return this.movieService.all();
+    try {
+      return this.movieService.all();
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
   @Get('/rankings')
   // we can put a validation pipe
-  rankings(@Query() query): object {
-    const { vote, popularity } = query;
-    if (vote) {
-      return this.movieService.rankingAsc();
+  rankings(@Query() query): any {
+    try {
+      const { property, order } = query;
+      if (property) { // how many validations here ?
+        return this.movieService.ranking(order, property);
+      } else {
+        return this.movieService.ranking('desc', 'popularity');
+      }
     }
-    /*  if (vote && vote === 'desc') {
-       return this.movieService.rankingDesc();
-     } else if (query.vote && query.vote === 'asc') {
-       return this.movieService.rankingAsc();
-     } else if (query.popularity && query.popularity === 'asc') {
-       return this.movieService.popularityAsc();
-     } else if (query.popularity && query.popularity === 'desc') {
-       return this.movieService.popularityDesc();
-     } */
+    catch (error) {
+      throw new Error(error);
+    }
   }
-
-  @Post('')
-  create() {
+    @Post('/add-movie')
+  create(@Body() movie: AddMovieDTO) {
+    try {
+      this.movieService.addMovie(movie);
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 }

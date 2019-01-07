@@ -1,36 +1,59 @@
-import { Injectable } from '@nestjs/common';
-import { MovieDatabase } from '../database/movieDb';
+import { Actor } from './../../database/entity/Actor';
+
+import { Injectable, HttpStatus } from '@nestjs/common';
+import { createConnection, Repository } from 'typeorm';
+import { Movie } from '../../database/entity/Movie';
+import { InjectRepository } from '@nestjs/typeorm';
+import { AddMovieDTO } from '../models/add-movie.dto';
 
 @Injectable()
 export class MovieService {
-  constructor(private readonly movieDB: MovieDatabase) {
+  constructor(
+    @InjectRepository(Movie)
+    private readonly movieRepository: Repository<Movie>,
+    @InjectRepository(Actor)
+    private readonly actorRepository: Repository<Actor>,
+  ) { }
 
-  }
+  public info: object;
+
   all(): object {
-    return this.movieDB.data();
-  }
-  rankingDesc(): object {
-    return this.movieDB.database.sort((movie1, movie2) => movie2.vote_average - movie1.vote_average);
-  }
-  rankingAsc(): object {
-    return this.movieDB.database.sort((movie1, movie2) => movie1.vote_average - movie2.vote_average);
-  }
-  popularityDesc(): object {
-    return this.movieDB.database.sort((movie1, movie2) => movie2.popularity - movie1.popularity);
-  }
-  popularityAsc(): object {
-    return this.movieDB.database.sort((movie1, movie2) => movie1.popularity - movie2.popularity);
+      this.info = this.movieRepository.find({});
+      return this.info;
   }
 
-  nameAsc(): object {
-    return this.movieDB.database.sort((movie1, movie2) => {
-      if (movie1.original_title > movie2.original_title) {
-        return -1;
+  async ranking(order: string, param: string): Promise<object> {
+      let result: any;
+      if (order === 'asc') {
+        result = await this.movieRepository
+        .createQueryBuilder('movie')
+        .orderBy(`movie.${param}`, `ASC`)
+        .getMany();
+      } else {
+        result = await this.movieRepository
+        .createQueryBuilder('movie')
+        .orderBy(`movie.${param}`, `DESC`)
+        .getMany();
       }
-      if (movie1.original_title < movie2.original_title) {
-        return 1;
-      }
-      return 0;
-    });
+      return result;
+  }
+
+  async addMovie(movieToAdd: AddMovieDTO): Promise<void> {
+    const movie: Movie = new Movie();
+    console.log(movieToAdd);
+    movie.adult = movieToAdd.adult;
+    movie.genres = movieToAdd.genres;
+    movie.original_title = movieToAdd.original_title;
+    movie.overview = movieToAdd.overview;
+    movie.popularity = movieToAdd.popularity;
+    movie.release_date = movieToAdd.release_date;
+    movie.vote_average = movieToAdd.vote_average;
+    movie.vote_count = movieToAdd.vote_count;
+    const actors: Actor[] = await Promise.all(movieToAdd.actors.map((actorId) => {
+      return this.actorRepository.findOne( { id: actorId.id });
+    }));
+    movie.movie_actors = actors;
+    console.log(actors);
+    await this.movieRepository.save(movie);
   }
 }

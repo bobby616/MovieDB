@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/services/shared/users.service.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\..\index.html">All files</a> / <a href="index.html">src/services/shared</a> users.service.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">45.16% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>14/31</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">16.67% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>1/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">50% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>2/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">41.38% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>12/29</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Role } from '../../../database/entity/Role';
+import { Injectable, BadRequestException, NotFoundException, HttpStatus } from '@nestjs/common';
+import { Repository } from 'typeorm';
+import { UserRegisterDTO } from '../../models/user-register.dto';
+import { User } from '../../../database/entity/User';
+import { InjectRepository } from '@nestjs/typeorm';
+import * as bcrypt from 'bcrypt';
+import { UserLoginDTO } from '../../models/user-login.dto';
+import { JwtPayload } from '../../contracts/jwt-payload';
+&nbsp;
+@Injectable()
+export class UsersService {
+&nbsp;
+    constructor(
+        @InjectRepository(User)
+        private readonly usersRepository: Repository&lt;User&gt;,
+        @InjectRepository(Role)
+        private readonly rolesRepository: Repository&lt;Role&gt;,
+    ) { }
+&nbsp;
+    async registerUser(userToRegister: UserRegisterDTO) {
+        const userFound = await this.usersRepository.findOne({ where: { username: userToRegister.username } });
+&nbsp;
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (userFound) {
+            throw new BadRequestException('There is already such user registered!');
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        userToRegister.password = await bcrypt.hash(userToRegister.password, 10);</span>
+        const user = <span class="cstat-no" title="statement not covered" >new User();</span>
+<span class="cstat-no" title="statement not covered" >        user.email = userToRegister.email;</span>
+<span class="cstat-no" title="statement not covered" >        user.firstName = userToRegister.firstName;</span>
+<span class="cstat-no" title="statement not covered" >        user.lastName = userToRegister.lastName;</span>
+<span class="cstat-no" title="statement not covered" >        user.password = userToRegister.password;</span>
+<span class="cstat-no" title="statement not covered" >        user.role = await this.rolesRepository.findOne({ where: { role: 'user' } });</span>
+<span class="cstat-no" title="statement not covered" >        user.username = userToRegister.username;</span>
+<span class="cstat-no" title="statement not covered" >        await this.usersRepository.save(user);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    async</span> signIn(user: UserLoginDTO): Promise&lt;User&gt; {
+        const userFound: User = <span class="cstat-no" title="statement not covered" >await this.usersRepository.findOne({ where: { username: user.username } });</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (userFound) {</span>
+            const result = <span class="cstat-no" title="statement not covered" >await bcrypt.compare(user.password, userFound.password);</span>
+<span class="cstat-no" title="statement not covered" >            if (result) {</span>
+<span class="cstat-no" title="statement not covered" >                return userFound;</span>
+            }
+<span class="cstat-no" title="statement not covered" >            throw new NotFoundException('Wrong credentials');</span>
+        }
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    async</span> validateUser(payload: JwtPayload): Promise&lt;User&gt; {
+        const userFound: User = <span class="cstat-no" title="statement not covered" >await this.usersRepository.findOne({ where: { username: payload.username } });</span>
+<span class="cstat-no" title="statement not covered" >        return userFound;</span>
+    }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jan 07 2019 01:22:29 GMT+0200 (GMT+02:00)
+</div>
+</div>
+<script src="..\..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\..\sorter.js"></script>
+</body>
+</html>
