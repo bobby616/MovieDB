@@ -64,7 +64,7 @@ describe('AuthService', () => {
                 msg = error.message;
             }
             // Аct & Assert
-            expect(msg).toEqual({ 'error': 'Not Found', 'message': 'Wrong credentials', 'statusCode': 404 });
+            expect(msg).toEqual({ error: 'Not Found', message: 'Wrong credentials', statusCode: 404 });
         });
 
         it('validateUser should be called', () => {
@@ -80,7 +80,7 @@ describe('AuthService', () => {
         it('validateUser should return user Object', async () => {
             // Arrange
             const user: UserLoginDTO = new UserLoginDTO();
-            userService.validateUser = () => { return 'toshi' };
+            userService.validateUser = () => 'toshi';
             const payload = { username: 'toshi' };
             jest.spyOn(authService, 'validateUser');
             // Act

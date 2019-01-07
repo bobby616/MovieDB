@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">25.81% </span>
+        <span class="strong">46.43% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>8/31</span>
+        <span class='fraction'>13/28</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/4</span>
+        <span class='fraction'>0/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">60% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/5</span>
+        <span class='fraction'>3/5</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">20.69% </span>
+        <span class="strong">42.31% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>6/29</span>
+        <span class='fraction'>11/26</span>
       </div>
     </div>
   </div>
@@ -96,51 +96,32 @@
 51
 52
 53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+54</td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -164,7 +145,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -178,40 +158,31 @@ import { Series } from '../../database/entity/Series';
 &nbsp;
 @Injectable()
 export class SeriesService {
-<span class="fstat-no" title="function not covered" >    constructor(</span>
+    constructor(
         @InjectRepository(Series)
-        private readonly <span class="cstat-no" title="statement not covered" >seriesRepository: Repository&lt;Series&gt;,</span>
+        private readonly seriesRepository: Repository&lt;Series&gt;,
         @InjectRepository(Actor)
-        private readonly <span class="cstat-no" title="statement not covered" >actorsRepository: Repository&lt;Actor&gt;,</span>
+        private readonly actorsRepository: Repository&lt;Actor&gt;,
     ) { }
-    info: object;
 &nbsp;
-<span class="fstat-no" title="function not covered" >    async</span> all(): Promise&lt;object&gt; {
-<span class="cstat-no" title="statement not covered" >            this.info = await this.seriesRepository.find({});</span>
-<span class="cstat-no" title="statement not covered" >            return this.info;</span>
+    async all(): Promise&lt;object&gt; {
+        return await this.seriesRepository.find({});
     }
 &nbsp;
-<span class="fstat-no" title="function not covered" >    ranking</span>(order: string, param: string): object {
-<span class="cstat-no" title="statement not covered" >            if (order === 'asc') {</span>
-<span class="cstat-no" title="statement not covered" >                this.info = this.seriesRepository.</span>
-                    createQueryBuilder('series')
-                    .orderBy(`series.${param}`, 'ASC')
-                    .getMany();
-            } else {
-<span class="cstat-no" title="statement not covered" >                this.info = this.seriesRepository.</span>
-                    createQueryBuilder('series')
-                    .orderBy(`series.${param}`, 'DESC')
-                    .getMany();
-            }
-<span class="cstat-no" title="statement not covered" >            return this.info;</span>
+    async ranking(ordered: string, param: string): Promise&lt;object&gt; {
+        try {
+            return await this.seriesRepository.find({ order: { [param]: ordered } });
+        } catch (error) {
+<span class="cstat-no" title="statement not covered" >            return await this.seriesRepository.find({ order: { popularity: 'DESC' } });</span>
+        }
     }
 &nbsp;
-<span class="fstat-no" title="function not covered" >    async</span> add(serieToAdd: AddSeriesDTO){
+<span class="fstat-no" title="function not covered" >    async</span> add(serieToAdd: AddSeriesDTO) {
         const checkSerie = <span class="cstat-no" title="statement not covered" >await this.seriesRepository.findOne({</span>
-            where: {original_name: serieToAdd.original_name},
+            where: { original_name: serieToAdd.original_name },
         });
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        if (checkSerie){</span>
+<span class="cstat-no" title="statement not covered" >        if (checkSerie) {</span>
 <span class="cstat-no" title="statement not covered" >            throw new Error('This series already exists');</span>
         }
 &nbsp;
@@ -224,12 +195,11 @@ export class SeriesService {
 <span class="cstat-no" title="statement not covered" >        serie.genres = serieToAdd.genres;</span>
 &nbsp;
         const actors: Actor[] = <span class="cstat-no" title="statement not covered" >await Promise.all(serieToAdd.series_actors.map(<span class="fstat-no" title="function not covered" >(a</span>ctor) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >            return this.actorsRepository.findOne( {id: actor.id} );</span>
+<span class="cstat-no" title="statement not covered" >            return this.actorsRepository.findOne({ id: actor.id });</span>
         }));
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        serie.series_actors = actors;</span>
 <span class="cstat-no" title="statement not covered" >        await this.seriesRepository.save(serie);</span>
-<span class="cstat-no" title="statement not covered" >        console.log(serie);</span>
     }
 }
 &nbsp;</pre></td></tr>
@@ -238,7 +208,7 @@ export class SeriesService {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Jan 06 2019 15:50:39 GMT+0200 (GMT+02:00)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jan 07 2019 01:22:29 GMT+0200 (GMT+02:00)
 </div>
 </div>
 <script src="..\..\prettify.js"></script>

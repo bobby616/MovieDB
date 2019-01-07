@@ -21,18 +21,14 @@ export class SeriesController {
     rankings(@Query() query): object {
         try {
             const { property, order } = query;
-            if (property) { // how many validations here ?
-                return this.seriesService.ranking(order, property);
-            } else {
-                return this.seriesService.ranking('desc', 'popularity');
-            }
+            return this.seriesService.ranking(order, property);
         } catch (error) {
             throw new Error(error);
         }
     }
 
     @Post('add')
-    async sign(@Body (new ValidationPipe({
+    async sign(@Body(new ValidationPipe({
         transform: true,
         whitelist: true,
     })) serie: AddSeriesDTO): Promise<void> {

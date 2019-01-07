@@ -9,6 +9,7 @@ import { Repository } from 'typeorm';
 
 describe('UserService ', () => {
     describe('register user should', () => {
+
         it('findOne method should throw', async () => {
             // Arrange
             const userRepo = new Repository<User>();
@@ -26,24 +27,18 @@ describe('UserService ', () => {
             }
             expect(msg).toBe('There is already such user registered!');
         });
-        // it('register user', async () => {
+        // it.only('register user', async () => {
         //     // Arrange
         //     const userRepo = new Repository<User>();
-        //     jest.spyOn(userRepo, `save`).mockImplementation((x) => true);
+        //     jest.spyOn(userRepo, `save`).mockImplementation(async () => true);
         //     const roleRepo = new Repository<Role>();
-        //     jest.spyOn(roleRepo, `findOne`).mockImplementation((x) => true);
+        //     jest.spyOn(roleRepo, `findOne`).mockImplementation(async () => true);
         //     const userService = new UsersService(userRepo, roleRepo);
-        //     const user = {
-        //     username: `pesho`,
-        //     password: 'wqdwqlof',
-        //     email: 'wqewekoqkr@gewg.gr',
-        //     firstName: 'weqeq',
-        //     lastName: 'weq',
-        //     };
+        //     const user = new UserRegisterDTO();
         //     // Act
-        //     userService.registerUser(user);
+        //     await userService.registerUser(user);
         //     // Assert
-        //     expect(userRepo.save).toHaveBeenCalledTimes(1);
+        //     expect(userRepo.save).toHaveBeenCalled();
         // });
     });
 });

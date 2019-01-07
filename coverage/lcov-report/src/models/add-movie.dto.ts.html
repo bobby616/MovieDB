@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for database/entity/Movie.ts</title>
+    <title>Code coverage report for src/models/add-movie.dto.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="..\..\prettify.css" />
     <link rel="stylesheet" href="..\..\base.css" />
@@ -16,13 +16,13 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="..\..\index.html">All files</a> / <a href="index.html">database/entity</a> Movie.ts
+      <a href="..\..\index.html">All files</a> / <a href="index.html">src/models</a> add-movie.dto.ts
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">88.24% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>15/17</span>
+        <span class='fraction'>11/11</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -30,14 +30,14 @@
         <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/2</span>
+        <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">92.86% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>13/14</span>
+        <span class='fraction'>11/11</span>
       </div>
     </div>
   </div>
@@ -66,73 +66,52 @@
 21
 22
 23
-24
-25
-26
-27
-28
-29
-30
-31</td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+24</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from 'typeorm';
-import { Actor } from './Actor';
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Actor } from 'server/database/entity/Actor';
+import { IsBoolean, IsString, IsNumber, IsArray, ValidateIf } from 'class-validator';
+import { isNumber } from 'util';
 &nbsp;
-@Entity()
-export class Movie {
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
-    @Column('tinyint', { default: null })
+export class AddMovieDTO {
+    @IsBoolean()
     adult: boolean;
-&nbsp;
-    @Column('varchar', { default: null })
+    @IsString()
     original_title: string;
-&nbsp;
-    @Column('longtext', { default: null })
+    @IsString()
     overview: string;
-    @Column('varchar', { default: null })
+    @IsString()
     release_date: string;
-    @Column('float', { default: null })
+    @IsNumber()
     vote_average: number;
-&nbsp;
-    @Column('float', { default: null })
+    @IsNumber()
     vote_count: number;
-    @Column('float', { default: null })
+    @IsNumber()
     popularity: number;
-&nbsp;
-    @Column('simple-array', { default: null })
+    @IsArray()
     genres: number[];
-&nbsp;
-    @ManyToMany(<span class="fstat-no" title="function not covered" >type</span> =&gt; <span class="cstat-no" title="statement not covered" >Actor,</span> <span class="fstat-no" title="function not covered" >actor</span> =&gt; <span class="cstat-no" title="statement not covered" >actor.movies </span>, {eager: true})
-    movie_actors: Actor[];
+    @IsArray()
+    actors: Actor[];
 }</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->

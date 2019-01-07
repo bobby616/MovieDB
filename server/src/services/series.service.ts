@@ -13,34 +13,25 @@ export class SeriesService {
         @InjectRepository(Actor)
         private readonly actorsRepository: Repository<Actor>,
     ) { }
-    info: object;
 
     async all(): Promise<object> {
-            this.info = await this.seriesRepository.find({});
-            return this.info;
+        return await this.seriesRepository.find({});
     }
 
-    ranking(order: string, param: string): object {
-            if (order === 'asc') {
-                this.info = this.seriesRepository.
-                    createQueryBuilder('series')
-                    .orderBy(`series.${param}`, 'ASC')
-                    .getMany();
-            } else {
-                this.info = this.seriesRepository.
-                    createQueryBuilder('series')
-                    .orderBy(`series.${param}`, 'DESC')
-                    .getMany();
-            }
-            return this.info;
+    async ranking(ordered: string, param: string): Promise<object> {
+        try {
+            return await this.seriesRepository.find({ order: { [param]: ordered } });
+        } catch (error) {
+            return await this.seriesRepository.find({ order: { popularity: 'DESC' } });
+        }
     }
 
-    async add(serieToAdd: AddSeriesDTO){
+    async add(serieToAdd: AddSeriesDTO) {
         const checkSerie = await this.seriesRepository.findOne({
-            where: {original_name: serieToAdd.original_name},
+            where: { original_name: serieToAdd.original_name },
         });
 
-        if (checkSerie){
+        if (checkSerie) {
             throw new Error('This series already exists');
         }
 
@@ -53,11 +44,10 @@ export class SeriesService {
         serie.genres = serieToAdd.genres;
 
         const actors: Actor[] = await Promise.all(serieToAdd.series_actors.map((actor) => {
-            return this.actorsRepository.findOne( {id: actor.id} );
+            return this.actorsRepository.findOne({ id: actor.id });
         }));
 
         serie.series_actors = actors;
         await this.seriesRepository.save(serie);
-        console.log(serie);
     }
 }

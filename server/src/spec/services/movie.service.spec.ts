@@ -7,15 +7,15 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 
 describe('MovieService ', () => {
     let movieService: MovieService;
-    let moviesRepository: any = {
-        save: () => { return {} },
+    const moviesRepository: any = {
+        save: () =>  {},
         findOne: () => ({}),
         find: () => ({}),
         createQueryBuilder: () => ({}),
         orderBy: () => ({}),
         getMany: () => ({}),
     };
-    let actorsRepository: any = {
+    const actorsRepository: any = {
         findOne: () => ({}),
     };
     beforeAll(async () => {
@@ -70,11 +70,9 @@ describe('MovieService ', () => {
 
         it('ranking should return movies in the Repo', async () => {
 
-
             // TO DO - Can't figure it out
 
             // Arrange
-
 
             /* const movie: AddMovieDTO = new AddMovieDTO();
             const actor = new Actor();
